@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Graph_BFS",
+            "request": "launch",
+            "mainClass": "Graph_BFS",
+            "projectName": "DSA_77514479"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"
