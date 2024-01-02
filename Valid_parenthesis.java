@@ -1,4 +1,8 @@
-class Valid_parenthesis {
+/*
+
+https://leetcode.com/problems/valid-parentheses/
+
+*/class Valid_parenthesis {
     public boolean isValid(String s) {
         Stack<Character> stack = new Stack<>();
         for(int i = 0 ; i<s.length(); i++)
