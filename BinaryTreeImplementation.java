@@ -8,6 +8,7 @@ public class BinaryTreeImplementation {
         Scanner sc = new Scanner(System.in);
         bt.insert(sc);
         bt.Display(root,"");
+        prettyDisplay(root , 0);
     }
     public static class Node 
     {
@@ -24,7 +25,7 @@ public class BinaryTreeImplementation {
     private static Node root ;
     public static void insert(Scanner sc )
     {
-        System.out.println("Enter the Value ");
+        System.out.println("Enter the Value of root node");
         int val = sc.nextInt();
         root = new Node(val);
         populate(sc , root);
@@ -59,6 +60,26 @@ public class BinaryTreeImplementation {
         System.out.println(indent + node.val);
         Display(node.left , indent+"\t");
         Display(node.right,indent+"\t");
+    }
+    public static void prettyDisplay(Node root , int level)
+    {
+        if(root == null)
+        {
+            return ;
+        }
+        prettyDisplay(root.right , level+1);
+        if(level != 0)
+        {
+            for(int i = 0 ; i<level-1 ; i++)
+            {
+                System.out.print("|\t\t");
+            }
+             System.out.println("|---------->"+root.val);
+        }
+        else{
+            System.out.println(root.val);
+        }
+         prettyDisplay(root.left , level+1);
     }
     
 }
