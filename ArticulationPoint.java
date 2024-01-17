@@ -1,5 +1,5 @@
 import java.util.*;
-public class BridgeIndGraph
+public class ArticulationPoint
 {
     public static void main(String args[])
     {
@@ -13,38 +13,46 @@ public class BridgeIndGraph
         int disT [] = new int [graph.length];
         int lowT [] = new int[graph.length];
         int time = 0 ;
+        boolean ap[]  = new boolean[graph.length];
         for(int i = 0 ; i<graph.length ; i++)
         {
             if(!visit[i])
             {
-                dfsUtil(graph , disT , lowT , -1 , visit , i  , time );
+                dfsUtil(graph , disT , lowT , -1 , visit , i  , time  , ap );
             }
         }
     }
-    public static void dfsUtil(ArrayList<Edge> graph[], int disT[], int lowT [] , int par , boolean visit[] , int curr , int time )
+    public static void dfsUtil(ArrayList<Edge> graph[], int disT[], int lowT [] , int par , boolean visit[] , int curr , int time  , boolean ap[])
     {
         visit[curr] = true ;
         disT[curr] = lowT[curr] =++time;
+        int children = 0;
         for(int i = 0 ; i<graph[curr].size() ; i++)
         {
             Edge e = graph[curr].get(i);
             if(e.dest == par)
             {
-                continue ;
+                continue;
             }
             else if(!visit[e.dest])
             {
-                dfsUtil(graph , disT , lowT , e.src , visit , e.dest , time);
+                dfsUtil(graph , disT , lowT , e.src , visit , e.dest , time , ap );
                 lowT[e.src] = Math.min(lowT[e.src] , lowT[e.dest]);
-                if(disT[curr] < lowT[e.dest])
-                {
-                    System.out.println(e.src +"--->"+e.dest);
-                }
+                if(par !=  -1 && disT[curr] <= lowT[e.dest] && ap[curr] == false )
+                {ap[curr] = true ;
+                    System.out.println(e.src);
+
+                }  
+                children++;
             }
             else 
             {
                 lowT[e.src] = Math.min(lowT[e.src] , disT[e.dest]);
             }
+        }
+        if(par == -1 && children > 1 && ap[curr] == false)
+        {
+            System.out.println(curr);
         }
     }
     public static void createGraph(ArrayList<Edge> graph[])
