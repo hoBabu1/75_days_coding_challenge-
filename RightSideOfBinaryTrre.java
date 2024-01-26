@@ -45,6 +45,5 @@ class RightSideOfBinaryTrre {
 
         }
         return list;
-        
     }
 }
